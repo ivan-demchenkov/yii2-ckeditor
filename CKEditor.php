@@ -47,7 +47,7 @@ class CKEditor extends InputWidget{
     }
 
     private function presetBasic(){
-        $options['height'] = 100;
+        $options['height'] = 400;
 
         $options['toolbarGroups'] = [
             ['name' => 'undo'],
