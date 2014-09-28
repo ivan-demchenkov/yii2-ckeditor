@@ -1,5 +1,5 @@
 {
-    "name": "tms/yii2-ckeditor",
+    "name": "mihaildev/yii2-ckeditor",
     "keywords": ["yii", "wysiwyg", "editor", "CKEditor"],
     "description": "Yii2 CKEditor fork for TMS",
     "homepage": "https://github.com/ivan-demchenkov/yii2-ckeditor",
