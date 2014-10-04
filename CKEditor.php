@@ -145,7 +145,11 @@ class CKEditor extends InputWidget{
         //$this->editorOptions['enterMode'] = '3';
         $this->editorOptions['removeDialogTabs'] = 'Link:advanced;image:Advanced;image:Link;image:advanced;image:advanced';
 		if(!isset($this->editorOptions['on']['instanceReady']))
-			$this->editorOptions['on']['instanceReady'] = new JsExpression("function(){
+			$this->editorOptions['on']['instanceReady'] = new JsExpression("function( ev ){jQuery(
+                CKEDITOR.instances[".Json::encode($this->options['id'])."].container.$).mouseleave(function() {
+                    CKEDITOR.instances[".Json::encode($this->options['id'])."].updateElement();});CKEDITOR.instances[".Json::encode($this->options['id'])."].on('blur', function() {
+                        CKEDITOR.instances[".Json::encode($this->options['id'])."].updateElement();});
+
                 this.dataProcessor.htmlFilter.addRules({
                 elements: {
                     ul : function( el ){
