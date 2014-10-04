@@ -36,6 +36,9 @@ class CKEditor extends InputWidget{
             }elseif($this->editorOptions['preset'] == 'full'){
                 $this->presetFull();
             }
+            elseif ($this->editorOptions['preset'] == 'backend') {
+                $this->presetBackend();
+            }
             unset($this->editorOptions['preset']);
         }
 
@@ -60,6 +63,16 @@ class CKEditor extends InputWidget{
         $options['removePlugins'] = 'elementspath';
         $options['resize_enabled'] = false;
 
+    }
+    private function presetBackend(){
+        $options['height'] = 400;
+        $options['toolbar'] = [
+            ['name' => 'formatting', 
+                        'items' => ['Bold', 'Italic', 'NumberedList', 'BulletedList','Blockquote','Link','Unlink','Image','Styles','RemoveFormat','Source']],
+        ];
+        $options['removeButtons'] = 'Subscript,Superscript,Flash,Table,Smiley,SpecialChar,HorizontalRule,PageBreak,Iframe';
+        $options['removePlugins'] = 'elementspath';
+        $options['resize_enabled'] = false;
 
         $this->editorOptions = ArrayHelper::merge($options, $this->editorOptions);
     }
@@ -129,9 +142,31 @@ class CKEditor extends InputWidget{
             echo Html::textarea($this->name, $this->value, $this->options);
         }
         echo Html::endTag('div');
-
+        //$this->editorOptions['enterMode'] = '3';
+        $this->editorOptions['removeDialogTabs'] = 'Link:advanced;image:Advanced;image:Link;image:advanced;image:advanced';
 		if(!isset($this->editorOptions['on']['instanceReady']))
-			$this->editorOptions['on']['instanceReady'] = new JsExpression("function( ev ){jQuery(CKEDITOR.instances[".Json::encode($this->options['id'])."].container.$).mouseleave(function() {CKEDITOR.instances[".Json::encode($this->options['id'])."].updateElement();});CKEDITOR.instances[".Json::encode($this->options['id'])."].on('blur', function() {CKEDITOR.instances[".Json::encode($this->options['id'])."].updateElement();})}");
+			$this->editorOptions['on']['instanceReady'] = new JsExpression("function(){
+                this.dataProcessor.htmlFilter.addRules({
+                elements: {
+                    ul : function( el ){
+                        if (!el.hasClass('list_2')){
+                             el.attributes.class = 'list_2';
+                        }
+                    },
+                    ol : function( el ){
+                         if (!el.hasClass('list_3')){
+                             el.attributes.class = 'list_3';
+                        }
+                    },
+                    blockquote : function ( el ){
+                        if (!el.hasClass('type1')){
+                            el.attributes.class = ' type_1';
+                       }
+                    }
+
+                }
+                });
+            }");
 
         if($this->_inline){
             $JavaScript = "CKEDITOR.inline(";
