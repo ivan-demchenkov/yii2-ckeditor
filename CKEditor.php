@@ -68,12 +68,12 @@ class CKEditor extends InputWidget{
         $options['height'] = 400;
         $options['toolbar'] = [
             ['name' => 'formatting', 
-                        'items' => ['Bold', 'Italic', 'NumberedList', 'BulletedList','Blockquote','Link','Unlink','Image','Styles','RemoveFormat','Source']],
+                        'items' => ['Bold', 'Italic', 'NumberedList', 'BulletedList','Blockquote','Link','Unlink','Image','Styles','RemoveFormat','Source','oembed']],
         ];
         $options['removeButtons'] = 'Subscript,Superscript,Flash,Table,Smiley,SpecialChar,HorizontalRule,PageBreak,Iframe';
         $options['removePlugins'] = 'elementspath';
         $options['resize_enabled'] = false;
-
+        $options['extraPlugins'] = 'oembed';
         $this->editorOptions = ArrayHelper::merge($options, $this->editorOptions);
     }
 
