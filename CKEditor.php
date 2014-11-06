@@ -68,9 +68,9 @@ class CKEditor extends InputWidget{
         $options['height'] = 400;
         $options['toolbar'] = [
             ['name' => 'formatting', 
-                        'items' => ['Bold', 'Italic','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'NumberedList', 'BulletedList','Blockquote','Link','Unlink','Image','oembed','Styles','RemoveFormat','Source']],
+                        'items' => ['Bold', 'Italic','JustifyLeft', 'JustifyCenter', 'JustifyRight', 'Table', 'NumberedList', 'BulletedList','Blockquote','Link','Unlink','Image','oembed','Styles','RemoveFormat','Source']],
         ];
-        $options['removeButtons'] = 'Subscript,Superscript,Flash,Table,Smiley,SpecialChar,HorizontalRule,PageBreak,Iframe';
+        $options['removeButtons'] = 'Subscript,Superscript,Flash,Smiley,SpecialChar,HorizontalRule,PageBreak,Iframe';
         $options['removePlugins'] = 'elementspath';
         $options['resize_enabled'] = false;
         $options['extraPlugins'] = 'oembed';
@@ -166,6 +166,11 @@ class CKEditor extends InputWidget{
                         if (!el.hasClass('type1')){
                             el.attributes.class = ' type_1';
                        }
+                    },
+                    table : function( el ){
+                        if(!el.hasClass('table table-striped')){
+                            el.attributes.class = 'table table-striped';
+                        }
                     }
 
                 }
